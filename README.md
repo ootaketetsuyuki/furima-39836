@@ -1,57 +1,65 @@
 # README
 --------------------
-ユーザー情報テーブル
-  has_many :商品情報テーブル
-  belongs_to :発送先情報テーブル
+users
+  has_many :items
+  belongs_to :send
 
-| Column             | Type   | Options                   |
-| ------------------ | ------ | -----------               |
-| nickname           | text   | null: false, unique: true |
-| email              | string | null: false               |
-| encrypted_password | string | null: false               |
-| name1              | string | null: false               |
-| name2              | string | null: false               |
-| birthday yymmdd    | string | null: false               |
+| Column             | Type   | Options                        |
+| ------------------ | ------ | -----------                    |
+| nickname           | string | null: false                    |
+| email              | string | null: false, foreign_key: true |
+| encrypted_password | string | null: false                    |
+| name1              | string | null: false                    |
+| name2              | string | null: false                    |
+| birthday           | date   | null: false                    |
 
 
 --------------------
-商品情報テーブル
-  belongs_to :ユーザー情報テーブル
-  belongs_to :購入記録
+items
+  belongs_to :user
+  belongs_to :buyrecord
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
-| nickname   | text       | null: false, foreign_key: true |
-| Item image | string     | null: false                    |
-| item name  | text       | null: false                    |
-| description| text       | null: false                    |
-| detail     | text       | null: false                    |
-| send       | text       | null: false                    |
-| price      | text       | null: false                    |
-| value      | text       | null: false                    |
+| nickname   | string     | null: false                    |
+| Item_image | string     | null: false                    |
+| item_name  | string     | null: false                    |
+| description| string     | null: false                    |
+| category   | string     | null: false                    |
+| situation  | string     | null: false                    |
+| send       | string     | null: false                    |
+| address    | text       | null: false                    |
+| day        | text       | null: false                    |
+| price      | string     | null: false                    |
+| value      | string     | null: false                    |
 | comment    | references | null: false                    |
+| email      | string     | null: false, foreign_key: true |
 
 
 --------------------
-購入記録テーブル
-  has_many :商品情報テーブル
-  belongs_to :発送先情報テーブル
+buyrecord
+  has_many :items
+  belongs_to :send
 
-| Column   | Type       | Options                        |
-| -------- | ---------- | ------------------------------ |
-| nickname | text       | null: false, foreign_key: true |
-| day      | string     | null: false                    |
-| time     | string     | null: false                    |
-| item name| text       | null: false                    |
+| Column    | Type       | Options                        |
+| --------  | ---------- | ------------------------------ |
+| nickname  | string     | null: false                    |
+| Item_image| string     | null: false                    |
+| item_name | string     | null: false                    |
+| day       | string     | null: false                    |
+| time      | string     | null: false                    |
+| item_name | text       | null: false                    |
+| email     | string     | null: false, foreign_key: true |
 
 
 --------------------
-発送先情報テーブル
-  has_many :ユーザー情報テーブル
-  has_many :購入記録テーブル
+sends
+  has_many :users
+  has_many :buyrecords
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
-| nickname | text       | null: false, foreign_key: true |
+| nickname | string     | null: false                    |
 | address  | text       | null: false                    |
 | day      | text       | null: false                    |
+| email    | string     | null: false, foreign_key: true |
