@@ -5,57 +5,57 @@ RSpec.describe @user, type: :model do
   end
 
   describe 'ユーザー新規登録' do
-    context '新規登録がうまくいくとき' do
-      it 'nicknameが登録できる' do
+    context '全ての項目が入力されていれば登録できる' do
+      it 'nicknameが入力されていれば登録できる' do
         @user.nickname = 'nickname'
         @user.valid?
         expect(@user.errors[:nickname]).to be_empty
       end
 
-      it 'emailが半角英数字と@が含めて登録できる' do
+      it 'emailが半角英数字と@が入力されていれば登録できる' do
         @user.email = 'tech123@co.jp'
         @user.valid?
         expect(@user.errors[:email]).to be_empty
       end
 
-      it 'passwordが6文字以上の半角英数字であれば登録できる' do
+      it 'passwordが6文字以上の半角英数字が入力されていれば登録できる' do
         @user.password = 'abc1234'
         @user.valid?
         expect(@user.errors[:password]).to be_empty
       end
-      it 'passwordとpassword_confirmationが一致であれば登録できる' do
+      it 'passwordとpassword_confirmationが入力されていれば登録できる' do
         @user.password_confirmation = 'abc1234'
         @user.password = 'abc1234'
         @user.valid?
         expect(@user.errors[:password]).to be_empty
       end
 
-      it '苗字が全角であれば登録できる' do
+      it '苗字が全角入力されていれば登録できる' do
         @user.first_name = '山田'
         @user.valid?
         @user.valid?
         expect(@user.errors[:first_name]).to be_empty
       end
 
-      it '名前が全角であれば登録できる' do
+      it '名前が全角入力されていれば登録できる' do
         @user.last_name = '太郎'
         @user.valid?
         expect(@user.errors[:last_name]).to be_empty
       end
 
-      it '苗字が全角カタカナであれば登録できる' do
+      it '苗字が全角カタカナ入力されていれば登録できる' do
         @user.first_name2 = 'ヤマダ'
         @user.valid?
         expect(@user.errors[:first_name]).to be_empty
       end
 
-      it '名前が全角カタカナであれば登録できる' do
+      it '名前が全角カタカナ入力されていれば登録できる' do
         @user.last_name2 = 'タロウ'
         @user.valid?
         expect(@user.errors[:first_name]).to be_empty
       end
 
-      it '生年月日が登録できる' do
+      it '生年月日が入力されていれば登録できる' do
         @user.birthday = Date.new(1930,1,1)
         @user.valid?
         expect(@user.errors[:birthday]).to be_empty
