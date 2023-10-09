@@ -17,7 +17,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors[:item_name]).to include("can't be blank")
       end
-
+      
       it 'descriptionが空白では出品できない' do
         @item.description = ''
         @item.valid?
@@ -82,6 +82,12 @@ RSpec.describe Item, type: :model do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
+      end
+
+      it '商品画像が空では出品出来ない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item).not_to be_valid
       end
     end
   end
