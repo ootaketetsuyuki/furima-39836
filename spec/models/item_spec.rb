@@ -3,10 +3,9 @@ RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
   end
-  
+
   describe '商品出品機能' do
     context '全ての項目が入力されていれば出品できる' do
-
       it '必須項目が存在すれば出品できる' do
         expect(@item).to be_valid
       end
@@ -64,21 +63,20 @@ RSpec.describe Item, type: :model do
       it 'priceが299以下では登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors[:price]).to include("must be greater than or equal to 300")
+        expect(@item.errors[:price]).to include('must be greater than or equal to 300')
       end
 
       it 'priceが10000000以上では登録できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors[:price]).to include("must be less than or equal to 9999999")
+        expect(@item.errors[:price]).to include('must be less than or equal to 9999999')
       end
 
       it 'priceが半角数字以外では登録できない' do
         @item.price = 'あいうｱｲｳ'
         @item.valid?
-        expect(@item.errors[:price]).to include("is not a number")
+        expect(@item.errors[:price]).to include('is not a number')
       end
     end
-  end  
+  end
 end
-

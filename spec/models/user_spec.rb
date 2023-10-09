@@ -56,14 +56,13 @@ RSpec.describe @user, type: :model do
       end
 
       it '生年月日が入力されていれば登録できる' do
-        @user.birthday = Date.new(1930,1,1)
+        @user.birthday = Date.new(1930, 1, 1)
         @user.valid?
         expect(@user.errors[:birthday]).to be_empty
       end
     end
-    
-    context '新規登録がうまくいかないとき' do
 
+    context '新規登録がうまくいかないとき' do
       it 'nicknameが空では登録できない' do
         @user.nickname = ''
         @user.valid?
@@ -92,13 +91,13 @@ RSpec.describe @user, type: :model do
 
       it 'passwordが空白だと登録できない' do
         @user.password = ''
-        @user.valid? 
+        @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
       it 'passwordが6文字以上の半角英数字ではないと登録できない' do
         @user.password = 'abc12'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
 
       it 'passwordとpassword_confirmationが不一致では登録できない' do
@@ -111,19 +110,19 @@ RSpec.describe @user, type: :model do
       it '数字のみのパスワードでは登録できない' do
         @user.password = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
 
       it '英字のみのパスワードでは登録できない' do
         @user.password = 'abcdef'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
 
       it '全角文字を含むパスワードでは登録できない' do
         @user.password = 'あa1いb2うc3'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
 
       it '苗字が空白では登録できない' do
@@ -134,7 +133,7 @@ RSpec.describe @user, type: :model do
       it '苗字が半角では登録できない' do
         @user.first_name = 'abc'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name is invalid")
+        expect(@user.errors.full_messages).to include('First name is invalid')
       end
 
       it '名前が空白では登録できない' do
@@ -145,7 +144,7 @@ RSpec.describe @user, type: :model do
       it '名前が半角では登録できない' do
         @user.last_name = 'abc'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name is invalid")
+        expect(@user.errors.full_messages).to include('Last name is invalid')
       end
 
       it '苗字が空白では登録できない' do
@@ -156,7 +155,7 @@ RSpec.describe @user, type: :model do
       it '苗字がカタカナ半角では登録できない' do
         @user.first_name2 = 'ｱｲｳ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name2 is invalid")
+        expect(@user.errors.full_messages).to include('First name2 is invalid')
       end
 
       it '名前が空白では登録できない' do
@@ -167,7 +166,7 @@ RSpec.describe @user, type: :model do
       it '名前がカタカナ半角では登録できない' do
         @user.last_name2 = 'ｱｲｳ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name2 is invalid")
+        expect(@user.errors.full_messages).to include('Last name2 is invalid')
       end
 
       it '生年月日が--では登録できない' do
@@ -178,4 +177,3 @@ RSpec.describe @user, type: :model do
     end
   end
 end
-
