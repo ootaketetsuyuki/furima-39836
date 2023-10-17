@@ -1,7 +1,7 @@
 class CreatePurchaseHistories < ActiveRecord::Migration[7.0]
   def change
     create_table :purchase_histories do |t|
-      t.references  :send,            null: false, foreign_key: true
+      t.references  :order,            null: false, foreign_key: true
       t.string      :post_code,       null: false
       t.integer     :prefecture_id,   null: false
       t.string      :city_name,       null: false

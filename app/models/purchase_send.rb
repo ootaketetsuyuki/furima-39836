@@ -15,9 +15,9 @@ class PurchaseSend
   end
 
     def save
-      send = Send.create(user_id: user_id, item_id: item_id)
+      order = Order.create(user_id: user_id, item_id: item_id)
 
       PurchaseHistory.create(post_code: post_code, prefecture_id: prefecture_id, city_name: city_name, 
-        street_address: street_address, building: building, phone_number: phone_number, send_id: send.id)
+        street_address: street_address, building: building, phone_number: phone_number, order_id: order.id)
     end
 end
