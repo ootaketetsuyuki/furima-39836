@@ -1,3 +1,4 @@
+window.addEventListener('turbo:load', () => {
 const priceInput = document.getElementById("item-price");
 priceInput.addEventListener("input", () => {
    const inputValue = parseFloat(priceInput.value);
@@ -10,4 +11,5 @@ priceInput.addEventListener("input", () => {
 
    addTaxDom.innerHTML =  taxAmount;
    total.innerHTML =  taxedPrice;
+});
 });
