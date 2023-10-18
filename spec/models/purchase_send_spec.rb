@@ -1,21 +1,20 @@
 require 'rails_helper'
-RSpec.describe PurchaseSend, type: :model do
+RSpec.describe @purchasesend, type: :model do
   before do
-    @purchase_send = FactoryBot.build(:purchase_send)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @purchase_send = FactoryBot.build(:purchase_send, user_id: user.id, item_id: item.id)
   end
 
     describe '商品購入機能' do
       context '全ての必須項目が入力されていれば購入できる' do
         it '必須項目が存在すれば購入できる' do
-          user = FactoryBot.create(:user)
-          item = FactoryBot.create(:item)
-          @purchase_send.user_id = user.id
-          @purchase_send.item_id = item.id
           expect(@purchase_send).to be_valid
         end
 
         it '建物名があれば登録できる' do
-          @purchase_send.building = nil
+          @purchase_send.building = ''
+          expect(@purchase_send).to be_valid
         end
       end
 
@@ -56,10 +55,6 @@ RSpec.describe PurchaseSend, type: :model do
           expect(@purchase_send.errors[:street_address]).to include("can't be blank")
         end
 
-        it '建物名の空白でも登録できる' do
-          @purchase_send.building = nil
-        end
-
         it 'phone_numberが空白だと購入できない' do
           @purchase_send.phone_number = ''
           @purchase_send.valid?
@@ -83,7 +78,7 @@ RSpec.describe PurchaseSend, type: :model do
           @purchase_send.valid?
           expect(@purchase_send.errors[:phone_number]).to include("is invalid")
         end
-        
+
         it 'user_idが紐付いていないと購入できない' do
           @purchase_send.user_id = nil
           @purchase_send.valid?
@@ -91,7 +86,7 @@ RSpec.describe PurchaseSend, type: :model do
         end
 
         it 'item_idが紐付いていないと購入できない' do
-          @purchase_send.user_id = nil
+          @purchase_send.item_id = nil
           @purchase_send.valid?
           expect(@purchase_send.errors.full_messages).to include("Item can't be blank")
         end
