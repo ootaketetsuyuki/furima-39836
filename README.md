@@ -2,7 +2,7 @@
 --------------------
 users
   has_many :items
-  has_many :sends
+  has_many :orders
 
 | Column             | Type   | Options                        |
 | ------------------ | ------ | -----------                    |
@@ -36,11 +36,11 @@ items
 
 --------------------
 purchase_histories
-  belongs_to :send
+  belongs_to :order
 
 | Column         | Type       | Options                        |
 | --------       | ---------- | ------------------------------ |
-| send           | references | null: false, foreign_key: true |
+| order           | references | null: false, foreign_key: true |
 | post_code      | string     | null: false                    |
 | prefecture_id  | integer    | null: false                    |
 | city_name      | string     | null: false                    |
@@ -50,9 +50,10 @@ purchase_histories
 
 
 --------------------
-sends
-  has_many :users
-  has_many :purchase_histories
+orders
+- belongs_to :item
+- belongs_to :user
+- has_one :purchase_history
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |

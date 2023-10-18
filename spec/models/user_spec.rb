@@ -33,7 +33,6 @@ RSpec.describe @user, type: :model do
       it '苗字が全角入力されていれば登録できる' do
         @user.first_name = '山田'
         @user.valid?
-        @user.valid?
         expect(@user.errors[:first_name]).to be_empty
       end
 
